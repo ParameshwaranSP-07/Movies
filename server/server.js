@@ -1,20 +1,16 @@
 const express = require("express");
 const path = require("path");
-const route = require("./movies");
+const moviesRouter = require("./movies");
 
 const app = express();
-app.use("/movies",route);
+
+// Mount movies API at /api/movies
+app.use("/api/movies", moviesRouter);
 
 // A test route to make sure the server is up.
 app.get("/api/ping", (request, response) => {
   console.log("❇️ Received GET request to /api/ping");
   response.send("pong!");
-});
-
-// A mock route to return some data.
-app.get("/api/movies", (request, response) => {
-  console.log("❇️ Received GET request to /api/movies");
-  response.json({ data: [{ id: 1, name: '1' }, { id: 2, name: '2' }] });
 });
 
 // Express port-switching logic
